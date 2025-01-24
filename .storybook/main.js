@@ -12,6 +12,9 @@ const config = {
     "@storybook/addon-interactions",
     "@chromatic-com/storybook"
   ],
+  docs: {
+    autodocs: 'tag',
+  },
   swc: () => ({
     jsc: {
       transform: {

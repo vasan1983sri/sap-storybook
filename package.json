@@ -25,6 +25,9 @@
     "storybook": "^8.2.2"
   },
   "dependencies": {
-    "prop-types": "^15.8.1"
+    "prop-types": "^15.8.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "storybook-addon-grid": "^0.5.2"
   }
 }
