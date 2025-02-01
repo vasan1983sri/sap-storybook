@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-    variant: 'green' | 'yellow' | 'red'
+    variant?: 'green' | 'yellow' | 'red'
 }
 
 const TrafficLight = ({variant = 'green'}: Props) => {

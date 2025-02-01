@@ -3,7 +3,14 @@ import TrafficLight from "./TrafficLight";
 
 const meta: Meta<typeof TrafficLight> = {
     component: TrafficLight,
-    title: 'Traffic Light'
+    title: 'Traffic Light',
+    tags: ['autodocs'],
+    argTypes: {
+        variant: {
+            control: {type: "radio"},
+            options: ['green','yellow','red']
+        }
+    }
 }
 export default meta;
 
@@ -11,9 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 
 export const Base: Story = {
-    args: {
-        variant: 'green'
-    }
+
 }
 
 export const Yellow: Story = {
