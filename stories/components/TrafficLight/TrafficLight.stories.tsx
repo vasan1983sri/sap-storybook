@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from "@storybook/react";
 import TrafficLight from "./TrafficLight";
+import React from "react";
 
 const meta: Meta<typeof TrafficLight> = {
     component: TrafficLight,
@@ -7,7 +8,7 @@ const meta: Meta<typeof TrafficLight> = {
     tags: ['autodocs'],
     argTypes: {
         variant: {
-            control: {type: "radio"},
+            control: {type: "select"},
             options: ['green','yellow','red']
         }
     }
