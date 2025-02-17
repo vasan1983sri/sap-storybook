@@ -5,13 +5,14 @@ import './checkbox.css'
 /**
  * Primary UI Checkbox Component for user Interaction
  */
-export const Checkboxes = ({transform, value, ...props}) =>{
+export const Checkboxes = ({transform, value, ...props}) => {
     //console.log(name)
     return (
         <div>
-           <input type='checkbox'
-                  style={{transform}}
-                  {...props} /> <label>{value}</label>
+            <label>
+                <input type='checkbox'
+                       style={{transform}} value={value}
+                       {...props} /> {value}</label>
         </div>
     )
 }
@@ -25,7 +26,7 @@ Checkboxes.propTypes = {
     /**
      * How big should the checkbox be?
      */
-    transform: PropTypes.oneOf(['scale(1.0)','scale(1.5)','scale(2.0)']),
+    transform: PropTypes.oneOf(['scale(1.0)', 'scale(1.5)', 'scale(2.0)']),
 
     /**
      * Name of the Checkbox
@@ -40,7 +41,10 @@ Checkboxes.propTypes = {
      * Optional click handler
      */
     onClick: PropTypes.func,
+    /**
+     *
+     */
+    onchange: PropTypes.func
 }
 
-Checkboxes.defaultProps = {
-}
+Checkboxes.defaultProps = {}
