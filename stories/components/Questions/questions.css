@@ -1,0 +1,8 @@
+.storybook-questions{
+    border-style: solid;
+    border-width: thin;
+}
+
+.storybook-questions .innerContainer {
+    padding: 10px;
+  }
