@@ -1,8 +1,14 @@
 .storybook-questions{
     border-style: solid;
     border-width: thin;
+    align-items: center;
 }
 
 .storybook-questions .innerContainer {
     padding: 10px;
   }
+
+.buttonStyle {
+    padding-top: 10px;
+    text-align: center;
+}
