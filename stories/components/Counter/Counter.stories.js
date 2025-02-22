@@ -10,8 +10,12 @@
             default: 0,
             control: 0
         }
+    },
+    args:{
+        initialValue: 0
     }
  }
+ 
 
  export const CounterDetails  = {
      initialValue: 0
