@@ -22,5 +22,17 @@
         ],
         "type": "MCQs",
         "correctAnswer": "Controller"
+    },
+    {
+        "id": 3,
+        "question": "When setState()  is called inside render() method, which of the following events takes place?",
+        "choices":[
+            "Duplicate key error",
+            "Repetitive output happiness on the screen",
+            "nothing happens",
+            "Stackoverflow error"
+        ],
+        "type": "MCQs",
+        "correctAnswer": "Stackoverflow error"
     }
 ]

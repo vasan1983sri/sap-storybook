@@ -1,4 +1,13 @@
-.storybook-questions{
+.storybook-questions-status {
+    display: inline;
+}
+
+.storybook-questions-fontsize{
+    font-size: 1.80em;
+}
+
+.storybook-questions {
+    
     border-style: solid;
     border-width: thin;
     align-items: center;
@@ -6,7 +15,20 @@
 
 .storybook-questions .innerContainer {
     padding: 10px;
-  }
+}
+
+.storybook-questions .individualQuestionContainer {
+    border-width: thin;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: red;
+    padding: 10px;
+}
+
+.storybook-questions .individualElementPadding{
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
 
 .buttonStyle {
     padding-top: 10px;

@@ -8,7 +8,7 @@ import './checkbox.css'
 export const Checkboxes = ({transform, value, ...props}) => {
     //console.log(name)
     return (
-        <div>
+        <div className="storybook-checkboxes">
             <label>
                 <input type='checkbox'
                        style={{transform}} value={value}
