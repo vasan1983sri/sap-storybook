@@ -3,7 +3,7 @@ import { Checkboxes } from "../Checkbox/Checkboxes";
 import { Button } from "../../Button";
 import "./questions.css";
 
-export const Questions = ({quizJson}) => {
+export const Questions = ({ quizJson }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<any>([]);
   const [correctAnswer, setcorrectAnswer] = useState<any>([]);
 
@@ -16,30 +16,34 @@ export const Questions = ({quizJson}) => {
   };
 
   useEffect(() => {
-    setcorrectAnswer(quizJson.map((item : any) => item.correctAnswer));
+    setcorrectAnswer(quizJson.map((item: any) => item.correctAnswer));
   }, []);
 
-  const handleSubmit = () => {
-    if (correctAnswer.length !== selectedAnswer.length) {
-      console.log(
-        "Not all question answered. Please select atleast one option per question before you click submit."
-      );
-    }
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
-    if (correctAnswer.length === selectedAnswer.length) {
+  const handleSubmit = () => {
+    setWrongQuestion([]);
+    if (correctAnswer.length !== selectedAnswer.length) {
+      alert("Not all question answered. Please select atleast one option per question before you click submit.")
+    }
+    let sAnswers: any = [];
+    if (
+      sAnswers.length === 0 &&
+      correctAnswer.length === selectedAnswer.length
+    ) {
       let count = 0;
-      let array: any = [];
       for (let i = 0; i < correctAnswer.length; i++) {
         if (selectedAnswer[i] === correctAnswer[i]) {
           count = count + 1;
           setActualMarkCount(count + "");
         } else {
           let question = i + 1;
-          array.push(question);
+          sAnswers.push(question + " ) Selected: " + selectedAnswer[i] + " Correct: " + correctAnswer[i]);
         }
       }
-      let nArray = array.join(",");
-      setWrongQuestion([...wrongQuestion, nArray]);
+      setWrongQuestion(sAnswers);
     }
   };
 
@@ -85,22 +89,37 @@ export const Questions = ({quizJson}) => {
           })}
         </div>
       </div>
-      <div className="buttonStyle">
-        <Button
-          size="large"
-          label="Submit"
-          primary={true}
-          value={"Submit"}
-          backgroundColor={undefined}
-          onClick={handleSubmit}
-        />
+      <div>
+        <div className="buttonStyle">
+          <Button
+            size="large"
+            label="Submit"
+            primary={true}
+            value={"Submit"}
+            backgroundColor={undefined}
+            onClick={handleSubmit}
+          />
+        </div>
+        {/* <div className="buttonStyle">
+          <Button
+            size="large"
+            label="Refresh"
+            primary={true}
+            value={"Submit"}
+            backgroundColor={undefined}
+            onClick={handleRefresh}
+          />
+        </div> */}
       </div>
       <div className="storybook-questions-status">
-        <span
-          className="storybook-questions-fontsize"
-        >
-          Incorrect Questions: {wrongQuestion ? wrongQuestion : 0}
+        <span className="storybook-questions-fontsize">
+          Incorrect Questions:
         </span>
+        <div>
+          {wrongQuestion.map((item: any, index: any) => (
+            <div key={index}>{item}</div>
+          ))}
+        </div>
       </div>
     </div>
   );
