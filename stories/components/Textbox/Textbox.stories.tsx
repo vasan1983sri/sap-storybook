@@ -1,5 +1,5 @@
 import TextBox from "./TextBox";
-import {Meta, StoryObj} from "@storybook/react";
+import { Meta, StoryObj } from "@Storybook/react"
 
 const meta: Meta<typeof TextBox> = {
     component: TextBox,

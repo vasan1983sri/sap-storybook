@@ -31,7 +31,7 @@ Checkboxes.propTypes = {
     /**
      * Name of the Checkbox
      */
-    name: PropTypes.string.OPTIONAL,
+    name: PropTypes.string,
 
     /**
      * Value of the Checkbox,
