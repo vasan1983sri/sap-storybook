@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import quizzes from "../Questions/Quizzes.json";
+import "./quizPage.css"
 
 export const QuizPage = () => {
   const [cQuestion, setCQuestion] = useState(0);
@@ -15,9 +16,9 @@ export const QuizPage = () => {
       <div>
         Question: {cQuestion + 1} / {quizzes.length}
       </div>
-      <div style={{ paddingTop: "10px" }}>
-        {question}
-        <div style={{ paddingTop: "10px" }}>
+      <div className="storybook-quiz quizPadding">
+        <div className="quizQn">{question}</div>        
+        <div className="quizAns">
           {choices.map((item) => {
             return <div>{item}</div>;
           })}
