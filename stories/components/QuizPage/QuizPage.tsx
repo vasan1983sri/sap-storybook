@@ -10,20 +10,25 @@ export const QuizPage = () => {
   const {question, choices} = quizzes[startQuesNum]
   const [selectedAnswer, setSelectedAnswer] = useState<any>([]);
   const [selAnswer, setSelAnswer]= useState('')
+  const [hasChanged, setHasChanged] = useState(false);
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e: any) => {
+    e.preventDefault();
     if(startQuesNum < quizzes.length-1)
     {
       setStartQuesNum(startQuesNum+1)
     }
+    setHasChanged(false)
   }
-  const handlePrev = ( )=> {
+  const handlePrev = (e: any)=> {
+    e.preventDefault();
     if(startQuesNum >= 1 )
     {
       setStartQuesNum(startQuesNum-1)
     }
   }
   const resetQuestion = () => {
+    window.location.reload();
     setStartQuesNum(0)
     setSelectedAnswer([])
   }
@@ -37,15 +42,24 @@ export const QuizPage = () => {
 
   console.log(selectedAnswer)
 
-  function CheckboxItem({ans, quesNum}) {   
+  function CheckboxItem({ans, quesNum}) { 
       const handleCheckboxChange = (e : any) => { 
-       setSelAnswer(e.target.value)
-       handleAnswerChange(e, quesNum)        
+        if (!hasChanged) {
+          console.log('onChange event triggered', e.target.value);
+          setHasChanged(true);
+          // Perform actions that should only happen once
+          //setSelAnswer(e.target.value) 
+          handleAnswerChange(e, quesNum)
+        } else {
+          setHasChanged(false)
+          handleAnswerChange(e, quesNum)
+        }
+      
       };
       return (    
         <div>
            <Checkboxes  transform={"scale(1.0)"}
-              value={ans} isChecked={selAnswer === ans?true:false}
+              value={ans} isChecked={selectedAnswer[quesNum] === ans?true:false}
               onChange={handleCheckboxChange} />
         </div>
       );

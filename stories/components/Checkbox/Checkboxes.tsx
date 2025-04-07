@@ -10,7 +10,7 @@ export const Checkboxes = ({transform, value, isChecked, ...props}) => {
         <div className="storybook-checkboxes">
             <label>
                 <input type='checkbox'
-                       style={{transform}} value={value}
+                       style={{transform}} value={value} checked={isChecked}
                        {...props} /> {value}</label>
         </div>
     )
