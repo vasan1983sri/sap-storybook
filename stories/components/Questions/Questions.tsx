@@ -79,6 +79,7 @@ export const Questions = ({ quizJson }) => {
                         transform={"scale(1.0)"}
                         id={questionId}
                         value={answers}
+                        isChecked={''}
                         onChange={handleAnswerChange}
                       />
                     ))}

@@ -5,8 +5,7 @@ import './checkbox.css'
 /**
  * Primary UI Checkbox Component for user Interaction
  */
-export const Checkboxes = ({transform, value, ...props}) => {
-    //console.log(name)
+export const Checkboxes = ({transform, value, isChecked, ...props}) => {
     return (
         <div className="storybook-checkboxes">
             <label>
