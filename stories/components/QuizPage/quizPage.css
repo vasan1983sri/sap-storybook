@@ -1,5 +1,11 @@
 .storybook-quiz {
-    padding-top: 20px;
+    padding-top: 10px;
+}
+
+.storybook-quiz .quizPadding{
+    padding: 20px;
+    font: 1em sans-serif;
+    font-size: 24px;
 }
 
 .storybook-quiz .quizQn {
@@ -8,13 +14,14 @@
     color: #fff;
     font-size: 24px;
     border-radius: 10px;
+    padding-bottom: 20px;
 }
 
 .storybook-quiz .quizAns {
     padding: 20px;
     display: grid;
-    background: #fafafa;
-    border: 5px solid #eee;
+    /* background: #fafafa; 
+    border: 5px solid #eee;*/
     border-radius: 20px;
     row-gap: 20px;
     font-size: 20px;
@@ -39,4 +46,17 @@
 
 .storybook-quiz .quizBtnRightAlign {
     text-align: right;
+}
+
+.storybook-quiz .quizMarkTemplate{
+    width: 100%;
+    display: table-row;
+}
+
+.storybook-quiz .quizTotalQuestion {
+    width: 800px;
+    display: table-cell;    
+}
+.storybook-quiz .quizTotalScore {
+    display: table-cell;    
 }
