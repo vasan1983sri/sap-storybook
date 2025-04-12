@@ -2,6 +2,10 @@
     padding-top: 10px;
 }
 
+.storybook-quiz .quizContainer{
+    padding: 20px;
+}
+
 .storybook-quiz .quizPadding{
     padding: 20px;
     font: 1em sans-serif;
@@ -30,7 +34,7 @@
 .storybook-quiz .quizBtnAlign {
     padding-top: 20px;
     display: grid;
-    grid-template-columns: 200px 400px 200px;
+    grid-template-columns: 200px 400px 160px;
     grid-column-gap: 68px
 }
 
@@ -49,14 +53,22 @@
 }
 
 .storybook-quiz .quizMarkTemplate{
-    width: 100%;
+    width: auto;
     display: table-row;
 }
 
 .storybook-quiz .quizTotalQuestion {
-    width: 800px;
-    display: table-cell;    
+    width: 720px;
+    display: table-cell;
+    padding-bottom: 20px;
+    font-size: 24px;    
 }
 .storybook-quiz .quizTotalScore {
-    display: table-cell;    
+    display: table-cell;
+    font-size: 24px;    
+}
+
+.storybook-quiz .quizAnswerResults {
+    font-size: 24px;
+    padding: 10px ;
 }

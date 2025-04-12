@@ -7,10 +7,13 @@ import { Button } from "../../Button";
 
 export const QuizPage = () => {
   const [startQuesNum, setStartQuesNum] = useState(0);
-  const { question, choices, correctAnswer } = quizzes[startQuesNum];
+  const { question, choices } = quizzes[startQuesNum];
   const [selectedAnswer, setSelectedAnswer] = useState<any>([]);
   const [hasChanged, setHasChanged] = useState(false);
   const [correctAnswers, setcorrectAnswers] = useState<any>([]);
+  const [wrongQuestion, setWrongQuestion] = useState<any>([]);
+
+  const [totalPoints, setTotalPoints] = useState(0);
 
   const totalQuestion = quizzes.length;
 
@@ -37,9 +40,17 @@ export const QuizPage = () => {
   };
 
   const submitAnswers = () => {
-    console.log("Submit Event Triggered");
-    for (let i = 0; i < selectedAnswer.length; i++) {
-      console.log(selectedAnswer[i]);
+    let sAnswers: any = [];
+    let count = 0;
+    for (let i = 0; i < correctAnswers.length; i++) {
+      if (selectedAnswer[i] === correctAnswers[i]) {
+        count = count + 1;
+        setTotalPoints(count);
+      }else{
+        let question = i + 1;
+          sAnswers.push(question + " ) Selected: " + selectedAnswer[i] + " Correct: " + correctAnswers[i]);
+      }
+      setWrongQuestion(sAnswers);
     }
   };
 
@@ -51,8 +62,8 @@ export const QuizPage = () => {
     });
   };
 
-  console.log(selectedAnswer);
-  console.log(correctAnswers);
+  // console.log(selectedAnswer);
+  // console.log(correctAnswers);
 
   function CheckboxItem({ ans, quesNum }) {
     const handleCheckboxChange = (e: any) => {
@@ -81,62 +92,74 @@ export const QuizPage = () => {
 
   return (
     <div className="storybook-quiz">
-      <div className="quizMarkTemplate">
-        <div className="quizTotalQuestion">
-          Question: {startQuesNum + 1} / {quizzes.length}
+      <div className="quizContainer">
+        <div className="quizMarkTemplate">
+          <div className="quizTotalQuestion">
+            Question: {startQuesNum + 1} / {quizzes.length}
+          </div>
+          <div className="quizTotalScore">Points Scored: {totalPoints}</div>
         </div>
-        <div className="quizTotalScore">Points Scored: {0}</div>
-      </div>
 
-      <div className="quizQn">
-        {question}
-        <div className="quizAns">
-          {choices.map((ans) => (
-            <CheckboxItem ans={ans} quesNum={startQuesNum} />
-          ))}
+        <div className="quizQn">
+          {question}
+          <div className="quizAns">
+            {choices.map((ans) => (
+              <CheckboxItem ans={ans} quesNum={startQuesNum} />
+            ))}
+          </div>
+        </div>
+        <div className="quizBtnAlign">
+          <div className="quizBtnLeftAlign">
+            <Button
+              size="large"
+              label={">> Next"}
+              disabled={startQuesNum === totalQuestion - 1}
+              primary={startQuesNum < totalQuestion - 1 ? true : false}
+              value={"NextQuestion"}
+              backgroundColor={undefined}
+              onClick={handleButtonClick}
+            />
+          </div>
+          <div className="quizSubmitBtnAlign">
+            <Button
+              size="large"
+              label="Submit"
+              primary={startQuesNum < totalQuestion - 1 ? false : true}
+              disabled={startQuesNum < totalQuestion - 1}
+              value={"Submit Answers"}
+              backgroundColor={undefined}
+              onClick={submitAnswers}
+            />
+            <Button
+              size="large"
+              label="Reset"
+              primary={false}
+              value={"Reset"}
+              backgroundColor={undefined}
+              onClick={resetQuestion}
+            />
+          </div>
+          <div className="quizBtnRightAlign">
+            <Button
+              size="large"
+              label="<< Prev"
+              disabled={startQuesNum === 0}
+              primary={startQuesNum === 0 ? false : true}
+              value={"Previous Question"}
+              backgroundColor={undefined}
+              onClick={handlePrev}
+            />
+          </div>
         </div>
       </div>
-      <div className="quizBtnAlign">
-        <div className="quizBtnLeftAlign">
-          <Button
-            size="large"
-            label={">> Next"}
-            disabled={startQuesNum === totalQuestion - 1}
-            primary={startQuesNum < totalQuestion - 1 ? true : false}
-            value={"NextQuestion"}
-            backgroundColor={undefined}
-            onClick={handleButtonClick}
-          />
-        </div>
-        <div className="quizSubmitBtnAlign">
-          <Button
-            size="large"
-            label="Submit"
-            primary={startQuesNum < totalQuestion - 1 ? false : true}
-            disabled={startQuesNum < totalQuestion - 1}
-            value={"Submit Answers"}
-            backgroundColor={undefined}
-            onClick={submitAnswers}
-          />
-          <Button
-            size="large"
-            label="Reset"
-            primary={false}
-            value={"Reset"}
-            backgroundColor={undefined}
-            onClick={resetQuestion}
-          />
-        </div>
-        <div className="quizBtnRightAlign">
-          <Button
-            size="large"
-            label="<< Prev"
-            disabled={startQuesNum === 0}
-            primary={startQuesNum === 0 ? false : true}
-            value={"Previous Question"}
-            backgroundColor={undefined}
-            onClick={handlePrev}
-          />
+      <div>
+      <span className="quizAnswerResults">
+          Incorrect Questions:
+        </span>
+        <div className="quizAnswerResults">
+          {wrongQuestion.map((item: any, index: any) => (
+            <div key={index}>{item}</div>
+          ))}
         </div>
       </div>
     </div>
