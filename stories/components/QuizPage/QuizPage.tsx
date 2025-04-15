@@ -12,6 +12,7 @@ export const QuizPage = () => {
   const [hasChanged, setHasChanged] = useState(false);
   const [correctAnswers, setcorrectAnswers] = useState<any>([]);
   const [wrongQuestion, setWrongQuestion] = useState<any>([]);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const [totalPoints, setTotalPoints] = useState(0);
 
@@ -37,20 +38,35 @@ export const QuizPage = () => {
   const resetQuestion = () => {
     setStartQuesNum(0);
     setSelectedAnswer([]);
+    setWrongQuestion([]);
+    setTotalPoints(0);
+    setIsDisabled(false);
   };
 
   const submitAnswers = () => {
     let sAnswers: any = [];
     let count = 0;
-    for (let i = 0; i < correctAnswers.length; i++) {
-      if (selectedAnswer[i] === correctAnswers[i]) {
-        count = count + 1;
-        setTotalPoints(count);
-      }else{
-        let question = i + 1;
-          sAnswers.push(question + " ) Selected: " + selectedAnswer[i] + " Correct: " + correctAnswers[i]);
+    if (
+      selectedAnswer.length > 0 &&
+      selectedAnswer.length === correctAnswers.length
+    ) {
+      for (let i = 0; i < correctAnswers.length; i++) {
+        if (selectedAnswer[i] === correctAnswers[i]) {
+          count = count + 1;
+          setTotalPoints(count);
+        } else {
+          let question = i + 1;
+          sAnswers.push(
+            question +
+              " ) Selected: " +
+              selectedAnswer[i] +
+              " Correct: " +
+              correctAnswers[i]
+          );
+        }
+        setWrongQuestion(sAnswers);
+        setIsDisabled(true);
       }
-      setWrongQuestion(sAnswers);
     }
   };
 
@@ -99,15 +115,36 @@ export const QuizPage = () => {
           </div>
           <div className="quizTotalScore">Points Scored: {totalPoints}</div>
         </div>
-
-        <div className="quizQn">
-          {question}
-          <div className="quizAns">
-            {choices.map((ans) => (
-              <CheckboxItem ans={ans} quesNum={startQuesNum} />
-            ))}
-          </div>
+        <div>
+          {isDisabled ? (
+            <div style={{ pointerEvents: "none", opacity: 0.5 }}>
+              {
+                <div className="quizQn">
+                  {question}
+                  <div className="quizAns">
+                    {choices.map((ans) => (
+                      <CheckboxItem ans={ans} quesNum={startQuesNum} />
+                    ))}
+                  </div>
+                </div>
+              }
+            </div>
+          ) : (
+            <div>
+              {
+                <div className="quizQn">
+                  {question}
+                  <div className="quizAns">
+                    {choices.map((ans) => (
+                      <CheckboxItem ans={ans} quesNum={startQuesNum} />
+                    ))}
+                  </div>
+                </div>
+              }
+            </div>
+          )}
         </div>
+
         <div className="quizBtnAlign">
           <div className="quizBtnLeftAlign">
             <Button
@@ -124,7 +161,13 @@ export const QuizPage = () => {
             <Button
               size="large"
               label="Submit"
-              primary={startQuesNum < totalQuestion - 1 ? false : true}
+              primary={
+                startQuesNum < totalQuestion - 1
+                  ? false
+                  : selectedAnswer.length === correctAnswers.length
+                  ? true
+                  : false
+              }
               disabled={startQuesNum < totalQuestion - 1}
               value={"Submit Answers"}
               backgroundColor={undefined}
@@ -153,9 +196,7 @@ export const QuizPage = () => {
         </div>
       </div>
       <div>
-      <span className="quizAnswerResults">
-          Incorrect Questions:
-        </span>
+        <span className="quizAnswerResults">Incorrect Questions:</span>
         <div className="quizAnswerResults">
           {wrongQuestion.map((item: any, index: any) => (
             <div key={index}>{item}</div>
