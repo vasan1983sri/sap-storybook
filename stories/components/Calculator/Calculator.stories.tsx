@@ -14,6 +14,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const defaultCalculator: Story = {
+
+    // More on interaction testing: https://storybook.js.org/docs/writing-tests/interaction-testing
     play: async ({canvasElement}) => {
         const canvas = within(canvasElement)
         const button8Exists = canvas.getByText('8')

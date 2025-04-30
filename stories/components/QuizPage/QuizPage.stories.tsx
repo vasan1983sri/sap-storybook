@@ -1,6 +1,5 @@
-import type {Meta, StoryObj} from '@Storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 import {QuizPage} from "./QuizPage";
-import quizzes from "../Questions/Quizzes.json";
 
 const meta : Meta<typeof QuizPage> = {
     component: QuizPage,

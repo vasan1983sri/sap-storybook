@@ -1,6 +1,6 @@
 import { fn } from "@storybook/test";
 import { DynamicOption } from "./DynamicOption";
-import { Meta, StoryObj } from "@Storybook/react"
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof DynamicOption> = {
 

@@ -14,32 +14,43 @@ export const QuizPage = () => {
   const [wrongQuestion, setWrongQuestion] = useState<any>([]);
   const [isDisabled, setIsDisabled] = useState(false);
 
+  const [startTime, setStartTime] = useState('');
+
+  const [endTime, setEndTime] = useState('');
+
   const [totalPoints, setTotalPoints] = useState(0);
 
   const totalQuestion = quizzes.length;
+
+  // useEffect(() => {  setStartTime(new Date().toLocaleTimeString());}, [startTime]); 
 
   useEffect(() => {
     setcorrectAnswers(quizzes.map((item: any) => item.correctAnswer));
   }, []);
 
-  const handleButtonClick = (e: any) => {
+  const goToNextQuestion = (e: any) => {
     e.preventDefault();
+    if(startQuesNum === 0){
+      setStartTime(new Date().toLocaleTimeString());
+    }
     if (startQuesNum < quizzes.length - 1) {
       setStartQuesNum(startQuesNum + 1);
     }
     setHasChanged(false);
   };
-  const handlePrev = (e: any) => {
+  const goToPrevQuestion = (e: any) => {
     e.preventDefault();
     if (startQuesNum >= 1) {
       setStartQuesNum(startQuesNum - 1);
     }
   };
-  const resetQuestion = () => {
+  const resetQuiz = () => {
     setStartQuesNum(0);
     setSelectedAnswer([]);
     setWrongQuestion([]);
     setTotalPoints(0);
+    setStartTime('');
+    setEndTime('')
     setIsDisabled(false);
   };
 
@@ -65,6 +76,7 @@ export const QuizPage = () => {
           );
         }
         setWrongQuestion(sAnswers);
+        setEndTime(new Date().toLocaleTimeString());
         setIsDisabled(true);
       }
     }
@@ -109,7 +121,9 @@ export const QuizPage = () => {
   return (
     <div className="storybook-quiz">
       <div className="quizContainer">
-        <div className="quizMarkTemplate">
+        Start Time: {startTime} <br />
+        End Time: {endTime}
+        <div className="quizMarkTemplate">          
           <div className="quizTotalQuestion">
             Question: {startQuesNum + 1} / {quizzes.length}
           </div>
@@ -154,7 +168,7 @@ export const QuizPage = () => {
               primary={startQuesNum < totalQuestion - 1 ? true : false}
               value={"NextQuestion"}
               backgroundColor={undefined}
-              onClick={handleButtonClick}
+              onClick={goToNextQuestion}
             />
           </div>
           <div className="quizSubmitBtnAlign">
@@ -179,7 +193,7 @@ export const QuizPage = () => {
               primary={false}
               value={"Reset"}
               backgroundColor={undefined}
-              onClick={resetQuestion}
+              onClick={resetQuiz}
             />
           </div>
           <div className="quizBtnRightAlign">
@@ -190,7 +204,7 @@ export const QuizPage = () => {
               primary={startQuesNum === 0 ? false : true}
               value={"Previous Question"}
               backgroundColor={undefined}
-              onClick={handlePrev}
+              onClick={goToPrevQuestion}
             />
           </div>
         </div>
