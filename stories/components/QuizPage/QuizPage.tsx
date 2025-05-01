@@ -4,6 +4,7 @@ import { DynamicOption } from "../DynamicOption/DynamicOption";
 import { Checkboxes } from "../Checkbox/Checkboxes";
 import "./quizPage.css";
 import { Button } from "../../Button";
+import "primeicons/primeicons.css";
 
 export const QuizPage = () => {
   const [startQuesNum, setStartQuesNum] = useState(0);
@@ -13,16 +14,17 @@ export const QuizPage = () => {
   const [correctAnswers, setcorrectAnswers] = useState<any>([]);
   const [wrongQuestion, setWrongQuestion] = useState<any>([]);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [wrongQuestionDisabled, setWrongQuestionDisabled] = useState(false);
 
-  const [startTime, setStartTime] = useState('');
+  const [startTime, setStartTime] = useState("");
 
-  const [endTime, setEndTime] = useState('');
+  const [endTime, setEndTime] = useState("");
 
   const [totalPoints, setTotalPoints] = useState(0);
 
   const totalQuestion = quizzes.length;
 
-  // useEffect(() => {  setStartTime(new Date().toLocaleTimeString());}, [startTime]); 
+  // useEffect(() => {  setStartTime(new Date().toLocaleTimeString());}, [startTime]);
 
   useEffect(() => {
     setcorrectAnswers(quizzes.map((item: any) => item.correctAnswer));
@@ -30,7 +32,7 @@ export const QuizPage = () => {
 
   const goToNextQuestion = (e: any) => {
     e.preventDefault();
-    if(startQuesNum === 0){
+    if (startQuesNum === 0) {
       setStartTime(new Date().toLocaleTimeString());
     }
     if (startQuesNum < quizzes.length - 1) {
@@ -49,8 +51,8 @@ export const QuizPage = () => {
     setSelectedAnswer([]);
     setWrongQuestion([]);
     setTotalPoints(0);
-    setStartTime('');
-    setEndTime('')
+    setStartTime("");
+    setEndTime("");
     setIsDisabled(false);
   };
 
@@ -78,8 +80,12 @@ export const QuizPage = () => {
         setWrongQuestion(sAnswers);
         setEndTime(new Date().toLocaleTimeString());
         setIsDisabled(true);
+        if (sAnswers.length > 0) {
+          setWrongQuestionDisabled(true);
+        }
       }
     }
+    
   };
 
   const handleAnswerChange = (e: any, quesNum: any) => {
@@ -123,7 +129,7 @@ export const QuizPage = () => {
       <div className="quizContainer">
         Start Time: {startTime} <br />
         End Time: {endTime}
-        <div className="quizMarkTemplate">          
+        <div className="quizMarkTemplate">
           <div className="quizTotalQuestion">
             Question: {startQuesNum + 1} / {quizzes.length}
           </div>
@@ -158,7 +164,6 @@ export const QuizPage = () => {
             </div>
           )}
         </div>
-
         <div className="quizBtnAlign">
           <div className="quizBtnLeftAlign">
             <Button
@@ -210,12 +215,17 @@ export const QuizPage = () => {
         </div>
       </div>
       <div>
-        <span className="quizAnswerResults">Incorrect Questions:</span>
-        <div className="quizAnswerResults">
-          {wrongQuestion.map((item: any, index: any) => (
-            <div key={index}>{item}</div>
-          ))}
-        </div>
+        {wrongQuestionDisabled ?  (
+          <div>
+            <i className="pi pi-times" style={{ color: "red", fontSize: "2rem"}}></i>
+            <span className="quizAnswerResults">Incorrect Questions:</span>
+            <div className="quizAnswerResults">
+              {wrongQuestion.map((item: any, index: any) => (
+                <div key={index}>{item}</div>
+              ))}
+            </div>
+          </div>
+        ) : null }
       </div>
     </div>
   );
