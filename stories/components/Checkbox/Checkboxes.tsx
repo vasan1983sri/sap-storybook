@@ -5,13 +5,13 @@ import './checkbox.css'
 /**
  * Primary UI Checkbox Component for user Interaction
  */
-export const Checkboxes = ({transform, value, ...props}) =>{
-    //console.log(name)
+export const Checkboxes = ({transform, value, isChecked, ...props}) => {
     return (
-        <div>
-           <input type='checkbox'
-                  style={{transform}}
-                  {...props} /> <label>{value}</label>
+        <div className="storybook-checkboxes">
+            <label>
+                <input type='checkbox'
+                       style={{transform}} value={value} checked={isChecked}
+                       {...props} /> {value}</label>
         </div>
     )
 }
@@ -25,12 +25,12 @@ Checkboxes.propTypes = {
     /**
      * How big should the checkbox be?
      */
-    transform: PropTypes.oneOf(['scale(1.0)','scale(1.5)','scale(2.0)']),
+    transform: PropTypes.oneOf(['scale(1.0)', 'scale(1.5)', 'scale(2.0)']),
 
     /**
      * Name of the Checkbox
      */
-    name: PropTypes.string.OPTIONAL,
+    name: PropTypes.string,
 
     /**
      * Value of the Checkbox,
@@ -40,7 +40,10 @@ Checkboxes.propTypes = {
      * Optional click handler
      */
     onClick: PropTypes.func,
+    /**
+     *
+     */
+    onchange: PropTypes.func
 }
 
-Checkboxes.defaultProps = {
-}
+Checkboxes.defaultProps = {}

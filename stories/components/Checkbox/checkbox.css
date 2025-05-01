@@ -1,3 +1,7 @@
 .storybook-checkboxes--primary{
     transform: scale(1.5%);
 }
+
+.storybook-checkboxes {
+    padding: 5px;
+}
