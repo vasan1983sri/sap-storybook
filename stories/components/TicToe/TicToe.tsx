@@ -1,3 +1,4 @@
+import { any } from 'prop-types';
 import {Button} from '../../Button'
 import React, {useRef, useState} from "react";
 
@@ -6,8 +7,8 @@ export default function TicToe() {
     const [startGame, setStartGame] = useState('Start Game')
     const [enableGame, setEnableGame] = useState(true)
 
-    const [playerX, setPlayerX] = useState([]);
-    const [playerO, setPlayerO] = useState([]);
+    const [playerX, setPlayerX] = useState<number[]>([]);
+    const [playerO, setPlayerO] = useState<number[]>([]);
     const [winner, setWinner] = useState('')
 
     const winningCombinationArray = [
@@ -48,6 +49,7 @@ export default function TicToe() {
     const startGameValue = () => {
         if (startGame === 'Start Game') {
             setStartGame("Game Started")
+            setWinner('Yet to be decided')
             setEnableGame(true)
         } else {
             setStartGame("Start Game")
@@ -61,7 +63,7 @@ export default function TicToe() {
         setPlayerX([])
         resetButtonValues()
         setButtonStates(initialButtonStates)
-        setWinner('')
+        setWinner('Yet to be decided')
     }
 
     const resetButtonValues = () => {
@@ -83,15 +85,17 @@ export default function TicToe() {
         }
     }
 
+
     const handlePlayerValue = (buttonId: any, currentPlayer: any) => {
         if (currentPlayer === 'X') {
-            const arr = [...playerX]
+            //const arr = [...playerX]
+            const arr: number[] = [...playerX]
             arr.push(buttonId)
             setPlayerX(arr)
             combinationArrayList(arr, currentPlayer)
         }
         if (currentPlayer === 'O') {
-            const arr = [...playerO]
+            const arr: number[] = [...playerO]
             arr.push(buttonId)
             setPlayerO(arr)
             combinationArrayList(arr, currentPlayer)
@@ -105,7 +109,7 @@ export default function TicToe() {
          const isIncluded = winningCombinationArray[i].every(value => array.includes(value));
          if(isIncluded)
          {
-             if(winner === '') {
+             if(winner === '' || winner === 'Yet to be decided') {
                  setWinner(currentPlayer)
              }
              setEnableGame(false)
@@ -118,6 +122,7 @@ export default function TicToe() {
         setButtonStates((prevState) => ({
             ...prevState, [buttonId]: true,
         }))
+        
     }
     const handleButtonFunctionalityAfterClicked = (currentPlayer: any, buttonId: any) => {
         handleButtonClick(buttonId)
@@ -163,6 +168,7 @@ export default function TicToe() {
                 handleButtonFunctionalityAfterClicked(currentPlayer, buttonId)
                 break;
         }
+        
     };
 
     return (
