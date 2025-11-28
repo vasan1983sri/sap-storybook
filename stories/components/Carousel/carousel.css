@@ -1,0 +1,15 @@
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.custom__carousel-example--basic__media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.025);
+}
+

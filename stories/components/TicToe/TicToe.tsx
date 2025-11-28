@@ -1,6 +1,5 @@
-import { any } from 'prop-types';
 import {Button} from '../../Button'
-import React, {useRef, useState} from "react";
+import {useState} from "react";
 
 export default function TicToe() {
     const [currentPlayer, setCurrentPlayer] = useState('X')
