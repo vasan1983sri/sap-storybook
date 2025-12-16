@@ -28,7 +28,7 @@ export const Carousel = () => {
         if(item.url){ 
           return (
             <div key={item.id} className="carousel-item" style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px' }}>
-              <h3>{item.title}</h3>
+              <h3>{item.title} <a href={item?.url} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'none' }}>*</a></h3>
               <p>{item.description} <a href={item?.url} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'none' }}>*</a></p>
             </div>
           )
