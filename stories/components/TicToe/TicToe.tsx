@@ -282,33 +282,6 @@ export default function TicToe() {
             onClick={() => handleClick("8")}
           />
         </div>
-        <br />
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "70px 70px 70px",
-            columnGap: "40px",
-            paddingTop: "30px",
-            rowGap: "40px",
-          }}
-        >
-          {buttonArray.map((idx) => {
-            const buttonValue = buttonArray[idx];
-            console.log("buttonValue", buttonValue);
-            return (
-              <div key={idx}>
-                <Button
-                  size="medium"
-                  primary={false}
-                  backgroundColor={"white"}
-                  label={buttonValues[buttonValue]}
-                  disabled={buttonStates[buttonValue]}
-                  onClick={() => handleClick(buttonValue)}
-                />
-              </div>
-            );
-          })}
-        </div>
       </div>
     </div>
   );
