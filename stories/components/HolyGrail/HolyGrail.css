@@ -1,0 +1,52 @@
+.holy-grail header{
+    height: 60px;
+    border: 3px solid green;
+    display: flex;
+    justify-content: center;
+    background-color: #ff7800;
+}
+
+.holy-grail footer{
+    height: 100px;
+    border: 3px solid green;
+    display: flex;
+    justify-content: center;
+    background-color: #d3d3d3;
+}
+.holy-grail .content {
+    display: flex;
+    height: 400px;
+}
+
+.holy-grail nav.leftbar {
+    width: 200px;
+    border: 3px solid green;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: #ff4500;
+}
+
+.holy-grail main {
+    flex: 1;
+    border: 1px solid green;
+    justify-content: center;
+    flex-direction: row;
+    align-content: flex-start;
+    display: flex;
+    background-color: #ffa5004a;
+}
+
+.holy-grail aside.rightbar {
+     width: 200px;
+    border: 3px solid green;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    background-color: #ff650087;
+}

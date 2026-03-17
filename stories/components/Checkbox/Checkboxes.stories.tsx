@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@Storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
 import { Checkboxes } from './Checkboxes'
 import {fn} from "@storybook/test";
 
