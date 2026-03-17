@@ -1,5 +1,5 @@
 import TextBox from "./TextBox";
-import { Meta, StoryObj } from "@Storybook/react"
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof TextBox> = {
     component: TextBox,
@@ -23,3 +23,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const defaultTextBox: Story = {}
+
+export const customTextBox: Story = {
+    args: {
+        type: 'input',
+        width: '200px',
+        textAlign: 'left'
+    }
+}
