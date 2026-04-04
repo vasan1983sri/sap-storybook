@@ -23,10 +23,12 @@ export const DrawerComponent = () => {
     {
       id: 1,
       img: img1,
+      name: "Product 1",
     },
     {
       id: 2,
       img: img2,
+      name: "Product 2",
     },
   ];
 
@@ -58,43 +60,67 @@ export const DrawerComponent = () => {
     setShowIcon(true);
   };
 
+  const removeProduct = (id: number) => {
+    setDrawerProducts(prev => {
+      const updateDrawerProducts = prev.filter(p => p.id !== id);
+      if (updateDrawerProducts.length === 0) {
+        closeDrawer();
+      }
+      return updateDrawerProducts;
+    });
+  };
+
   const showAddIcon = () => {
-    if (drawerProducts.length === 0)
-      return (
-        <div>
-          {drawerProducts.map((product: any) => (
-            <AddCircleOutlineRoundedIcon
-              key={product.id}
-              style={{
-                fontSize: "64px",
-                border: "1px solid #ccc",
-                marginLeft: "200px",
-                marginRight: "200px",
-              }}
-              onClick={() => handleClick(product.img)}
-            />
-          ))}
-        </div>
-      );
     if (drawerProducts.length > 0) {
       return (
-        <div>
-          {drawerProducts.map((product: any) => (
-            <img
-              key={product.id}
-              src={product.img}
-              alt={`Product ${product.id}`}
-              style={{
-                width: "64px",
-                height: "64px",
-                border: "1px solid #ccc",
-                marginRight: "50px",
-                objectFit: "cover",
-                cursor: "pointer",
-              }}
-            />
-          ))}
-        </div>
+        <>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: "32px",
+            }}
+          >
+            {drawerProducts.map((product: any) => (
+              <div
+                key={product.id}
+                style={{ display: "flex", alignItems: "flex-start" }}
+              >
+                <div>
+                  <div>
+                    <img
+                      key={product.id}
+                      src={product.img}
+                      alt={`Product ${product.id}`}
+                      style={{
+                        width: "64px",
+                        height: "64px",
+                        border: "1px solid #ccc",
+                        objectFit: "cover",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <p>{product.name}</p>
+                  </div>
+                </div>
+                <IconButton
+                  size="small"
+                  onClick={() => removeProduct(product.id)}
+                  style={{
+                    top: "-10px",
+                    right: "-10px",
+                    background: "#fff",
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </div>
+            ))}
+          </div>
+        </>
       );
     }
   };
@@ -113,9 +139,10 @@ export const DrawerComponent = () => {
           display: "flex",
           flexDirection: "row",
           alignContent: "flex-start",
-          justifyContent: "space-evenly",
-          alignItems: "stretch",
+          justifyContent: "center",
+          alignItems: "center",
           paddingBottom: "20px",
+          gap: "32px",
         }}
       >
         {showAddIcon()}
@@ -132,20 +159,23 @@ export const DrawerComponent = () => {
 
   return (
     <>
+    <div style={{display: "flex", flexDirection: "row", gap: "16px"}}>
       <Button
         size="medium"
-        label="Img 1"
+        label="Product 1"
         primary={true}
         backgroundColor={"#1ea7fd"}
         onClick={() => toggleDrawer(1)}
       />
       <Button
         size="medium"
-        label="Img 2"
+        label="Product 2"
         primary={true}
         backgroundColor={"#1ea7fd"}
         onClick={() => toggleDrawer(2)}
       />
+    </div>
+      
       <Drawer
         anchor="bottom"
         variant={drawerVariant}
